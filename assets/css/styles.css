@@ -1,0 +1,265 @@
+:root
+{
+    --light-green : #b0dfb0;
+    --lighter-green : #b8e6b8;
+    --input-color: white;
+    --button : #073B3A;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+#contact
+{
+    width:clamp(400px, 35%,40%);
+    margin: 0 auto;
+} 
+.who
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#history
+{
+    width:clamp(400px, 35%,40%);
+    height:100%;
+}
+ 
+header {
+    background-color: var(--light-green);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav {
+    display: flex;
+    width:100%;
+    justify-content: space-between;
+    gap: 10px;
+
+    img{
+        width:clamp(35px,20%,50px);
+        border-radius:50%;
+    }
+    .menu-button{
+        background-color:var(--button);
+        border: none;
+        border-radius: 50%;
+        padding: 8px;
+        cursor: pointer;
+    }
+    .profile-button 
+    {
+        border: none;
+        border-radius: 50%;
+        aspect-ratio: 1;
+        width:clamp(35px,20%,50px);
+    }
+    #search
+    {
+        width:clamp(300px,40%,450px);
+        padding: 8px;
+        border: 1px solid #ffffff;
+        border-radius: 5px;
+    }
+}
+
+main {
+    padding: 20px;
+}
+
+.about
+{
+    
+    display:flex;
+    flex-direction: row;
+    gap:3rem;
+
+}
+
+.sketchy-border {
+    padding: 15px;
+    width:inherit;
+    background-color: var(--lighter-green);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+
+.team-member
+{
+    flex-direction: row;
+    width:clamp(300px, 30%, 35%);
+    img{
+        width:clamp(35px,20%,50px);
+        border-radius:50%;
+    }
+}
+
+.contact form {
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--lighter-green);
+}
+
+.team
+{
+    display:grid;
+    width:80%;
+    height:fit-content;
+    gap:2rem;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 4rem, 1fr, 1fr; 
+    :nth-child(1)
+    {
+        grid-area: 1 / 1 / 2 / 3;
+    }
+}
+
+svg {
+    position: absolute;
+    pointer-events: none; 
+    z-index: 3;
+}
+
+.nav-search-button
+{
+    
+    width: 100%;
+    form
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;    
+    }
+    button
+    {
+        background-color: var(--button);
+        border: none;
+        border-radius: 5px;
+    }
+}
+#formSketch
+{
+    width: 100%;
+    padding:0;
+    display: flex;
+    flex-direction: row;    
+    position: relative;
+    form {
+        width:100%;
+        label
+        {
+            width:100%;
+            position: relative;
+            display:flex;
+            flex-direction: row;
+            p
+            {
+                width:100%;
+            }
+        }
+        input
+        {
+            width:clamp(250px,40%,100%);
+            height:fit-content;
+            border:0;
+            z-index: 2;
+            background-color: var(--input-color);
+            display: inline-block;
+            position:relative;        
+        }
+        textarea
+        {
+            width:clamp(250px,40%,100%);
+            border:0;
+            z-index: 2;
+            background-color: var(--input-color);   
+            height:10rem; 
+            display: inline-block;
+            position:relative;      
+            resize: unset; 
+        }
+    }    
+}
+
+#contact
+{
+    width:100%;
+    margin:0 auto;
+    width:clamp(250px, 35%,40%);
+}
+
+.contact label {
+    font-weight: bold;
+}
+
+
+.contact button {
+    border: none;
+    cursor: pointer;
+    background-color: var(--button);
+    border-radius:10px ;
+    width:clamp(100px,10%,11%); 
+    padding:20px;
+    color:var(--input-color);
+    margin: 0 auto;
+}
+
+footer {
+    background-color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+@media (width<1330px)
+{
+    .about
+    {
+        width:clamp(300px, 75%,60%)!important; 
+    }
+    #team
+    {
+        display: flex;
+        flex-direction: column;
+
+    }
+    #history
+    {
+        width:clamp(300px, 25%,30%);
+        height:100%;
+    }
+}
+@media (width<720px)
+{
+    .about
+    {
+        margin:0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }f
+    #formSketch form label
+    {   
+        display: flex;
+        flex-direction: column;
+    }
+    input, textarea
+    {
+        width:clamp(250px,60%,80%);
+    }
+}

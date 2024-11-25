@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À propos - Sketchy Style</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/roughjs/bundled/rough.min.js"></script>
+</head>
+<body>
+    <header id="navbar" class="sketchy-border">
+        <nav>
+            <button class="menu-button">Menu</button>
+            <section class="nav-search-button">
+                <form>
+                    <input id="search" type="search" placeholder="Rechercher...">
+                    <button class="sketchy rounded-sketchy-border" type="submit">🔍</button>
+                </form>
+            </section>
+            <button class="profile-button"><img src="assets/img/mad_alfred.jpg"></button>
+        </nav>
+    </header>
+    <main>
+        <section class="about">
+            <section class="who">
+                <h2>Qui sommes nous ?</h2>
+                <div class="history zigzag sketchy-border" id="history">
+                    <h2>Notre histoire :</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet auctor sit habitant tristique ut.
+                        Fusce eu malesuada orci, sed ultricies erat. Suspendisse potenti.
+                    </p>
+                </div>
+            </section>
+            <div class="team" id="team">
+                <h2>L'équipe :</h2>
+                <div class="team-member hached sketchy-border">
+                    <img src="assets/img/mad_alfred.jpg">
+                    <p><strong>Thierry J</strong></p>
+                    <p>rôle : UX/UI designer</p>
+                    <p>âge : 26 ans</p>
+                </div>
+                <div class="team-member hached sketchy-border">
+                    <img src="assets/img/mad_alfred.jpg">
+                    <p><strong>Bob Marley</strong></p>
+                    <p>rôle : lead dev</p>
+                    <p>âge : 26 ans</p>
+                </div>
+                <div class="team-member hached sketchy-border">
+                    <img src="assets/img/mad_alfred.jpg">
+                    <p><strong>Stev</strong></p>
+                    <p>rôle : dev front-end</p>
+                    <p>âge : 26 ans</p>
+                </div>
+                <div class="team-member hached  sketchy-border">
+                    <img src="assets/img/mad_alfred.jpg">
+                    <p><strong>John Attend</strong></p>
+                    <p>rôle : dev back-end</p>
+                    <p>âge : 47 ans</p>
+                </div>
+            </div>
+        </section>
+        <section class="contact" id="contact">
+            <h2>Prendre contact :</h2>
+            <section id="formSketch" class="sketchy-border">
+                <form>
+
+                    <label class="sketchy-border" for="nom">
+                        <p>
+                            Nom :                            
+                        </p>
+                        <input class="sketchy-border" type="text" id="nom" name="nom">
+                    </label>
+
+                    <label class="sketchy-border" for="prenom">
+                        <p>
+                            Prénom :
+                        </p>
+                        <input class="sketchy-border" type="text" id="prenom" name="prenom">
+                    </label>
+                    
+                    <label for="email" class="sketchy-border">
+                        <p>
+                            Email :
+                        </p>
+                        <input class="sketchy-border" type="email" id="email" name="email" >                    
+                    </label>
+                    
+                    <label for="message" class="sketchy-border">
+                        <p>
+                            Message :                            
+                        </p>
+                        <textarea class="sketchy-border" id="message" name="message"></textarea>
+                    </label>
+                    
+                    <button type="submit">Envoyer</button>
+                </form>    
+            </section>
+        </section>
+    </main>
+
+    <footer>
+        <p>footer infos</p>
+    </footer>
+    <script src="assets/js/sketchy.js"></script>
+</body>
+</html>
