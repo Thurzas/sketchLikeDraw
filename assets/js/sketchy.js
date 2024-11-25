@@ -13,7 +13,8 @@ class SketchyStrategy {
         let svg = this.element.querySelector(':scope > svg');
         if (!svg) {
             svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-            svg.style.pointerEvents = 'none'; // Empêche les interactions utilisateur
+            // Empêche les interactions utilisateur
+            svg.style.pointerEvents = 'none'; 
             this.element.appendChild(svg);
 
             // Positionnement relatif requis pour l'élément parent
@@ -26,7 +27,7 @@ class SketchyStrategy {
 }
 
 // --- Stratégie pour les labels ---
-class LabelSketchyStrategy extends SketchyStrategy {
+class LabelSketch extends SketchyStrategy {
     draw() {
         const input = document.getElementById(this.element.htmlFor);
         if (!input) return; // Si aucun input associé, rien à faire
@@ -54,7 +55,7 @@ class LabelSketchyStrategy extends SketchyStrategy {
 }
 
 // --- Stratégie par défaut (autres éléments) ---
-class DefaultSketchyStrategy extends SketchyStrategy {
+class DefaultSketchy extends SketchyStrategy {
     draw() {
         const svg = this.createOrGetSVG();
         const rc = rough.svg(svg);
@@ -91,7 +92,6 @@ class HachedFiller extends SketchyStrategy {
         {
             const style=getComputedStyle(this.element,'background-color');            
             this.color = style['background-color'];
-            console.log(this.color);
         }
         // Ajuste le SVG
         svg.setAttribute('width', offsetWidth + 20);
@@ -122,8 +122,8 @@ class HachedFiller extends SketchyStrategy {
     }
 }
 
-// --- Stratégie pour un element en zigzag ---
-class ZigzagFiller extends SketchyStrategy {
+// --- Stratégie pour un element hashuré ---
+class ZigzagFillers extends SketchyStrategy {
     draw() {
         const svg = this.createOrGetSVG();
         const rc = rough.svg(svg);
@@ -133,7 +133,6 @@ class ZigzagFiller extends SketchyStrategy {
         {
             const style=getComputedStyle(this.element,'background-color');            
             this.color = style['background-color'];
-            console.log(this.color);
         }
         // Ajuste le SVG
         svg.setAttribute('width', offsetWidth + 20);
@@ -155,8 +154,8 @@ class ZigzagFiller extends SketchyStrategy {
                 strokeWidth: 2,
                 fill: this.color,         
                 fillStyle: 'zig-zag',
-                fillWeight: 6,         
-                hachureGap: 11        
+                fillWeight: 12,         
+                hachureGap: 12        
             }
         );
         svg.appendChild(sketchyRect);
@@ -164,8 +163,130 @@ class ZigzagFiller extends SketchyStrategy {
     }
 }
 
-// --- Stratégie pour le corps (body) ---
-class PaperLikeStragery extends SketchyStrategy {
+// --- Stratégie pour un burger menu ---
+class SketchyBurgerMenu extends SketchyStrategy{
+    constructor(element, color, backgroundColor)
+    {
+        super(element);
+        this.color = color;
+        this.backgroundColor = backgroundColor;
+    }
+    draw() {
+        const svg = this.createOrGetSVG();
+        const rc = rough.svg(svg);
+
+        // Taille de la fenêtre pour remplir tout le fond
+        const width = this.element.offsetWidth;
+        const height = this.element.offsetHeight;
+    
+        if(this.backgroundColor === undefined)
+        {
+            const style=getComputedStyle(this.element,'background-color');
+            this.backgroundColor = style['background-color'];
+        }
+        if(this.color === undefined)
+        {
+            const style=getComputedStyle(this.element,'color');
+            this.color = style['color'];
+        }
+        console.log(this.color);
+        console.log(this.backgroundColor);
+            // Définir les dimensions et le style du SVG
+        svg.setAttribute('width', width);
+        svg.setAttribute('height', height);
+        svg.style.position = 'absolute';
+        svg.style.top = '0';
+        svg.style.left = '0';
+        svg.style.zIndex = '1'; // Envoyer le SVG derrière tous les autres éléments
+
+        // Vide le contenu précédent
+        svg.innerHTML = '';
+
+        // Génération des carreaux
+        const spacing = 15; // Espacement des lignes
+        const strokeColor = String(this.color); // Couleur des lignes
+        const strokeWidth = 0.5; // Épaisseur des lignes
+        const fillColor = String(this.backgroundColor); //
+        // Lignes horizontales
+        const sketchyRect = rc.rectangle(
+            0, 0, width+3, height+3,
+            { 
+                roughness: 0.5,
+                fillStroke: 'none',
+                fill: fillColor,         
+                fillStyle: 'cross-hached',
+                fillWeight: 6,         
+                hachureGap: 9                          
+            }
+        );
+        svg.appendChild(sketchyRect);
+
+        for (let y = 0; y < 3; y ++) {
+            const line = rc.line(5, y*spacing, width-5, y*spacing, {
+                roughness: 0.5,
+                bowing: .5,
+                stroke: strokeColor,
+                strokeWidth: 6,  
+            });
+            svg.appendChild(line);
+        }
+        
+        this.element.style.backgroundColor = "transparent";
+    }
+}
+
+// --- Stratégie pour un arrière plan d'element en zigzag ---
+class FilledSketch extends SketchyStrategy {    
+    constructor(element,style) {
+        super(element);
+        this.style = style;
+    }
+    draw() {
+        const svg = this.createOrGetSVG();
+        const rc = rough.svg(svg);
+
+        const { offsetWidth, offsetHeight } = this.element;
+        if(this.color===undefined)
+        {
+            const style=getComputedStyle(this.element,'background-color');            
+            this.color = style['background-color'];
+        }
+        if(this.style==undefined||"")
+        {
+            this.style="cross-hached";
+        }
+        // Ajuste le SVG
+        svg.setAttribute('width', offsetWidth + 20);
+        svg.setAttribute('height', offsetHeight + 20);
+        svg.style.position = 'absolute';
+        svg.style.top = '-10px';
+        svg.style.left = '-10px';
+        svg.style.zIndex = '-1';
+        // Vide le contenu précédent
+        svg.innerHTML = '';
+
+        // Dessine une bordure esquissée autour de l'élément
+        const sketchyRect = rc.rectangle(
+            10, 10, offsetWidth, offsetHeight,
+            { 
+                roughness: 2.5,
+                bowing: 1.5,
+                stroke: '#333',
+                strokeWidth: 2,
+                fill: this.color,         
+                fillStyle: `${this.style}`,
+                fillWeight: 6,         
+                hachureGap: 11        
+            }
+        );
+        console.log(sketchyRect);
+        svg.appendChild(sketchyRect);
+        this.element.style.backgroundColor = "transparent";
+    }
+}
+
+// --- Stratégie pour un remplissage en quadrillage de fueille A4 ---
+class PaperLikeSketch extends SketchyStrategy {
     draw() {
         const svg = this.createOrGetSVG();
         const rc = rough.svg(svg);
@@ -224,7 +345,7 @@ class PaperLikeStragery extends SketchyStrategy {
 class SketchyStrategyFactory {
     static createStrategy(element) {
         if (element.tagName === 'LABEL') {
-            return new LabelSketchyStrategy(element);
+            return new LabelSketch(element);
         }
         if(element.classList.contains('hached'))
         {
@@ -232,14 +353,22 @@ class SketchyStrategyFactory {
         }
         if(element.classList.contains('zigzag'))
         {
-            return new ZigzagFiller(element);
+            return new ZigzagFillers(element);
+        }
+        if(element.classList.contains('dots'))
+        {
+            return new FilledSketch(element,'dots');
+        }
+        if(element.classList.contains('SketchyBurger'))
+        {
+            return new SketchyBurgerMenu(element, undefined,undefined);
         }
         if(element.tagName === 'BODY')
         {
-            return new PaperLikeStragery(element);
+            return new PaperLikeSketch(element);
         }
 
-        return new DefaultSketchyStrategy(element);
+        return new DefaultSketchy(element);
     }
 }
 
@@ -281,7 +410,7 @@ window.addEventListener('load', () => {
     manager.addElement(document.getElementById('navbar'));
     manager.addElement(document.querySelector('footer'));
     manager.addElement(document.querySelector('body'));
-
+    manager.addElement(document.querySelector('.menu-button'))
     // Redessine lors d'un redimensionnement
     window.addEventListener('resize', () => manager.redrawAll());
 });

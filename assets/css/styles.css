@@ -53,9 +53,10 @@ nav {
         border-radius:50%;
     }
     .menu-button{
-        background-color:var(--button);
+        color: var(--button);
+        background-color: white;
+        width:clamp(25px,75px,100px);
         border: none;
-        border-radius: 50%;
         padding: 8px;
         cursor: pointer;
     }
