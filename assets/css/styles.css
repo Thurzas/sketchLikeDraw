@@ -55,7 +55,7 @@ nav {
     .menu-button{
         color: var(--button);
         background-color: white;
-        width:clamp(25px,75px,100px);
+        width:clamp(35px,75px,100px);
         border: none;
         padding: 8px;
         cursor: pointer;
